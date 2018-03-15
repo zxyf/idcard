@@ -36,12 +36,14 @@ def parse(id_card_no):
             if len(id_card_no) >= 4:
                 city_code = id_card_no[0:4]
                 city = citys.get(city_code, None)
-                results['city'] = city['text']
-                districts = city['districts']
-                if len(id_card_no) >= 6:
-                    district_code = id_card_no[0:6]
-                    district = districts.get(district_code, None)
-                    results['district'] = district['text']
+                if city:
+                    results['city'] = city['text']
+                    districts = city['districts']
+                    if len(id_card_no) >= 6:
+                        district_code = id_card_no[0:6]
+                        district = districts.get(district_code, None)
+                        if district:
+                            results['district'] = district['text']
 
     birthday_year = -1
     birthday_month = -1
